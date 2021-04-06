@@ -1,0 +1,71 @@
+<!-- {{ responsedData | json }} -->
+<br><br><br><br><br><br>
+<div class="container">
+<form enctype="multipart/form-data" method="post">
+<p-table
+  #dt
+  [columns]="columnDefs"
+  [value]="rowData"
+  [paginator]="true"
+  [rows]="30"
+  class="table"
+>
+<div class="text-center">
+    <div>
+      <i class="fa fa-search"></i>
+      <input
+        type="text"
+        pInputText
+       
+        placeholder="Global Filter"
+        (input)="dt.filterGlobal($event.target.value, 'contains')"
+        style="width:auto"
+      />
+    
+    </div>
+  </div>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th
+        scope="col"
+        *ngFor="let col of columnDefs"
+        [pSortableColumn]="col.field"
+        style="background-color: #eee;"
+        >
+        {{ col.header }}
+
+        <p-sortIcon
+          [field]="col.field"
+          ariaLabel="Activate to sort"
+          ariaLabelDesc="Activate to sort in descending order"
+          ariaLabelAsc="Activate to sort in ascending order"
+        ></p-sortIcon>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-columns="columnDefs">
+    <tr scope="row">
+      <td *ngFor="let col of columnDefs" (click)="onClick(rowData[col.field])">
+        {{ rowData[col.field] }}
+      </td>
+      <td>
+        <input
+          type="file"
+          class="form-control"
+          #fileInput
+          multiple
+          name="images"
+          (change)="onFileSelected($event)"
+        />
+
+
+      </td>
+      <td>
+        <button class="btn btn-primary" type="submit" (click)="upload(rowData.userId,rowData._id)">
+          Upload 
+        </button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+</form></div>

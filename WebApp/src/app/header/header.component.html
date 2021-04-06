@@ -1,0 +1,120 @@
+<!--::header part start::-->
+<header class="main_menu home_menu">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-12">
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <a class="navbar-brand" href="index.html">
+            <img src="../../assets/img/favicon.png" alt="logo" /><strong
+              >Health Card</strong
+            >
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div
+            class="collapse navbar-collapse main-menu-item justify-content-center"
+            id="navbarSupportedContent"
+          >
+            <ul
+              *ngIf="userType == 'doctor'"
+              id="prescrition"
+              class="navbar-nav align-items-center"
+            >
+              <li class="nav-item dropdown">
+                <!-- <a
+                              class="nav-link dropdown-toggle"
+                              id="prescActions"
+                              role="button"
+                              data-toggle="dropdown"
+                              aria-haspopup="true"
+                              aria-expanded="false"
+                            > -->
+                <a class="nav-link" routerLink="/Diagnose">
+                  New Diagnosis
+                </a>
+                <!-- <div class="dropdown-menu" aria-labelledby="prescActions">
+                              <a class="dropdown-item" routerLink="/Prescription/Add">Add Prescrition</a>
+                              <a class="dropdown-item" routerLink="/Prescription/Doctor/View">View Prescriptions</a>
+                            </div> -->
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/Doctor/Profile/View"
+                  >View Profile</a
+                >
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" routerLink="getPrescriptions"
+                  >View Prescription</a
+                >
+              </li>
+            </ul>
+
+            <!--Navigation bar links for patients-->
+            <ul
+              *ngIf="userType == 'patient'"
+              id="prescrition"
+              class="navbar-nav align-items-center"
+            >
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/Patient/Home"
+                >Home</a
+              >
+            </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/Prescription/Patient/View"
+                  >View Prescriptions</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/Patient/Profile/View"
+                  >View Profile</a
+                >
+              </li>
+             
+            </ul>
+            <!--/Navigation bar links for patients-->
+
+            <ul *ngIf="userType == 'lab'" class="navbar-nav align-items-center">
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/lab/labhome">Add Report</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/lab/uploadedreport"
+                  >Uploaded Report</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <ul class="navbar-nav align-items-center">
+            <li>
+              <a *ngIf="!isLogged" class="nav-link" routerLink="/Login"
+                >Login</a
+              >
+              <!-- <button class="btn btn-link" *ngIf="loginInfo.isLogged" (click)="logout()" >Logout</button>  -->
+              <button class="btn btn" *ngIf="isLogged" (click)="logout()">
+                Logout
+              </button>
+            </li>
+            <li *ngIf="!isLogged">
+              <a class="nav-link" routerLink="/Signup">Sign Up</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Header part end-->
+<router-outlet></router-outlet>

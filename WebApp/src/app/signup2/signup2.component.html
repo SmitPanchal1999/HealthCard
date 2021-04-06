@@ -1,0 +1,312 @@
+<!--::regervation_part start::-->
+
+<section class="regervation_part section_padding">
+  <div class="container">
+    <!-- <h2>Extra Information</h2> -->
+    <div *ngIf="user === 'medic'">
+      <div
+        class="row align-items-center regervation_content"
+        style="box-shadow: 3px 2px 20px rgb(200,200,200,0.7);padding: 5% 5%;"
+      >
+        <div class="col-lg-7">
+          <div class="regervation_part_iner">
+            <form #MedicForm>
+              <h2>Medical Shop Registration</h2>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="licence"
+                    placeholder="Licence Number"
+                  />
+                </div>
+                <div class="form-group time_icon col-md-6">
+                  <input
+                    class="form-control"
+                    type="text"
+                    onfocus="this.type='Date'"
+                    onblur="this.type='text'"
+                    id="DOE"
+                    placeholder="Licence Expiry Date"
+                  />
+                </div>
+
+                <div class="form-group col-md-12">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="lab_name"
+                    placeholder="shop Name"
+                  />
+                </div>
+                <div class="form-group col-md-12">
+                  <textarea
+                    class="form-control"
+                    id="address"
+                    rows="2"
+                    placeholder="shop Address "
+                  ></textarea>
+                </div>
+              </div>
+              <div class="regerv_btn">
+                <button
+                  class="btn_2"
+                  type="button"
+                  (click)="registerLab(MedicForm)"
+                >
+                  Register
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <br /><br /><br /><br /><br /><br />
+        <div class="col-lg-5 col-md-6">
+          <div class="reservation_img" style="margin-left: 25%;">
+            <!-- <img
+                  src="../../assets/img/reservation.png"
+                  alt=""
+                  class="reservation_img_iner"
+                /> -->
+            <img src="../../assets/img/pharmacy.png" width="90%" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="user === 'lab'">
+      <div
+        class="row align-items-center regervation_content"
+        style="box-shadow: 3px 2px 20px rgb(200,200,200,0.7);padding: 5% 5%;"
+      >
+        <div class="col-lg-7">
+          <div class="regervation_part_iner">
+            <form #labform>
+              <h2>Lab Registration</h2>
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="lab_name"
+                    placeholder="Lab Name"
+                  />
+                </div>
+                <div class="form-group col-md-6">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="licence"
+                    placeholder="Licence Number"
+                  />
+                </div>
+                <div class="form-group time_icon col-md-6">
+                  <input
+                    class="form-control"
+                    type="text"
+                    onfocus="this.type='Date'"
+                    onblur="this.type='text'"
+                    id="DOE"
+                    placeholder="Licence Expiry Date"
+                  />
+                </div>
+                <div class="form-group col-md-12">
+                  <textarea
+                    class="form-control"
+                    id="address"
+                    rows="2"
+                    placeholder="Lab Address "
+                  ></textarea>
+                </div>
+                <div class="form-group col-md-12">
+                  <ng-multiselect-dropdown
+                    name="l1"
+                    [placeholder]="'Select Available Tests'"
+                    [data]="dropdownList"
+                    [(ngModel)]="selectedItems"
+                    [settings]="dropdownSettings"
+                  >
+                  </ng-multiselect-dropdown>
+                </div>
+
+                <!-- <div class="form-group col-md-4">
+                    <h2>start Timing</h2>
+                  </div>
+                  <div class="form-group time_icon col-md-4">
+                    <input
+                      class="form-control"
+                      type="time"
+                      onblur="this.type='text'"
+                      id="DOE"
+                      placeholder="Start Time"
+                    />
+                  </div>
+                  <div class="form-group time_icon col-md-4">
+                  <h4>End Timing</h4>
+                    <input
+                      class="form-control"
+                      type="time"
+                      onblur="this.type='text'"
+                      id="DOE"
+                      placeholder="End Time"
+                    />
+                  </div>d-->
+              </div>
+              <div class="regerv_btn">
+                <button
+                  class="btn_2"
+                  type="button"
+                  (click)="registerLab(labform)"
+                >
+                  Register
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <br /><br /><br /><br /><br /><br />
+        <div class="col-lg-5 col-md-6">
+          <div class="reservation_img" style="margin-left: 25%;">
+            <!-- <img
+                  src="../../assets/img/reservation.png"
+                  alt=""
+                  class="reservation_img_iner"
+                /> -->
+            <img src="../../assets/img/chemical.png" width="90%" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="user === 'doctor'">
+      <div
+        class="row align-items-center regervation_content"
+        style="box-shadow: 3px 2px 20px rgb(200,200,200,0.7);padding: 5% 5%;"
+      >
+        <div class="col-lg-7">
+          <div class="regervation_part_iner">
+            <form #DocForm>
+              <!-- <h2>Doctor Registration</h2> -->
+              <h2>Doctor Basic Information</h2>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="licence"
+                    placeholder="Doctor Licence Number"
+                  />
+                </div>
+
+                <div class="form-group col-md-6">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="degree"
+                    placeholder="Degree/Major In"
+                  />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-12">
+                  <ng-multiselect-dropdown
+                    name="specialitiesList"
+                    class="form-control"
+                    placeholder="Doctor Specialities"
+                    [data]="dropdownListDoc"
+                    [(ngModel)]="selectedItemsDoc"
+                    [settings]="dropdownSettings"
+                  >
+                  </ng-multiselect-dropdown>
+                </div>
+              </div>
+              <div class="form-row"></div>
+              <section *ngFor="let speciality of specialities; let i = index">
+                <div class="form-row">
+                  <div class="form-group col-md-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      [(ngModel)]="speciality.speciality"
+                      (keydown.Tab)="addSpeciality()"
+                      name="speciality_{{ i }}"
+                      placeholder="New Speciality"
+                    />
+                  </div>
+                  <div class="form-group col-md-3">
+                    <button
+                      type="button"
+                      style="background-color: #c82333;"
+                      class="btn btn-sm form-control btn-danger"
+                      (click)="removeSpeciality(i)"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </div>
+              </section>
+              <br />
+              <h2>Work Place Information</h2>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="work_name"
+                    placeholder="Work Place Name"
+                  />
+                </div>
+                <div class="form-group col-md-6">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="work_contact"
+                    placeholder="Work Place Contact"
+                  />
+                </div>
+              </div>
+              <div class="form-row">
+                <textarea
+                  class="form-control"
+                  id="work_address"
+                  rows="4"
+                  placeholder="Work Palce Address "
+                ></textarea>
+              </div>
+              <div class="regerv_btn">
+                <button
+                  class="btn_2"
+                  type="button"
+                  (click)="registerDoc(DocForm)"
+                >
+                  Register
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <br /><br /><br /><br /><br /><br />
+        <div class="col-lg-5 col-md-6">
+          <div class="reservation_img" style="margin-left: 25%;">
+            <!-- <img
+                  src="../../assets/img/reservation.png"
+                  alt=""
+                  class="reservation_img_iner"
+                /> -->
+            <img src="../../assets/img/doctor.png" width="90%" />
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-lg-5 col-md-6">
+        <div class="reservation_img">
+          <img
+            src="../../assets/img/reservation.png"
+            alt=""
+            class="reservation_img_iner"
+          />
+        </div>
+      </div> -->
+    </div>
+  </div>
+</section>
+<!--::regervation_part end::-->

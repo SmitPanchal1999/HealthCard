@@ -1,0 +1,110 @@
+<section class="regervation_part section_padding">
+  <div class="container" style="margin-top:0;">
+    <div class="row align-items-center regervation_content" style="box-shadow: 3px 2px 20px rgb(200,200,200,0.7);padding: 5% 5%;">
+      <div class="col-lg-12">
+        <div class="regervation_part_iner">
+          <h1>New Diagnosis</h1>
+          <br /><br />
+          <form #form>
+            <div class="form-group col-md-8">
+              <div class="form-row">
+                <div class="form-group col-md-2">
+                  <h2>DoctorId:</h2>
+                </div>
+                <div class="form-group col-md-4">
+                  <h2>{{ userId }}</h2>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-2">
+                  <h2>Name:</h2>
+                </div>
+                <div class="form-group col-md-4">
+                  <h2>Dr. {{ userData.firstname }}</h2>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-2">
+                  <h2>Date:</h2>
+                </div>
+                <div class="form-group col-md-4">
+                  <h2>{{ today }}</h2>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-2">
+                <h2>Patient Id:</h2>
+              </div>
+              <!-- <div class="form-group col-md-4">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="userId"
+                    placeholder="Add Symptoms"
+                  />
+                </div> -->
+              <div class="ng-autocomplete">
+                <ng-autocomplete
+                  [data]="temp"
+                  [searchKeyword]="keyword"
+                  (selected)="selectEvent($event)"
+                  (inputChanged)="onChangeSearch($event)"
+                  (inputFocused)="onFocused($event)"
+                  [itemTemplate]="itemTemplate"
+                  [notFoundTemplate]="notFoundTemplate"
+                >
+                </ng-autocomplete>
+
+                <ng-template #itemTemplate let-item>
+                  <a style="color: #000000;" [innerHTML]="item.name"></a>
+                </ng-template>
+
+                <ng-template #notFoundTemplate let-notFound>
+                  <div [innerHTML]="notFound"></div>
+                </ng-template>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-2">
+                <h2>Symptoms:</h2>
+              </div>
+              <div class="form-group col-md-4">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="symptoms"
+                  placeholder="Add Symptoms"
+                />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-2">
+                <h2>Reports Required:</h2>
+              </div>
+              <div class="form-group col-md-4">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="reports"
+                  placeholder="Add Symptoms"
+                />
+              </div>
+            </div>
+
+            <div class="regerv_btn">
+              <button class="btn_2" type="button" (click)="addDiagnosis(form)">
+                Add Diagnosis
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

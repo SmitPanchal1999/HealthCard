@@ -1,0 +1,163 @@
+<section class="regervation_part section_padding">
+  <div class="container">
+    <div
+      class="row align-items-center regervation_content"
+      style="box-shadow: 3px 2px 20px rgb(200,200,200,0.7);padding: 5% 5%;"
+    >
+      <div class="col-lg-7">
+        <div class="regervation_part_iner">
+          <form #BasicForm name="BasicForm">
+            <h1>Search Patient Prescription</h1>
+            <br />
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <div class="ng-autocomplete">
+                  <ng-autocomplete
+                    [data]="temp"
+                    [searchKeyword]="keyword"
+                    (selected)="selectEvent($event)"
+                    (inputChanged)="onChangeSearch($event)"
+                    (inputFocused)="onFocused($event)"
+                    [itemTemplate]="itemTemplate"
+                    [notFoundTemplate]="notFoundTemplate"
+                  >
+                  </ng-autocomplete>
+                  <ng-template #itemTemplate let-item>
+                    <a style="color: #000000;" [innerHTML]="item.name"></a>
+                  </ng-template>
+
+                  <ng-template #notFoundTemplate let-notFound>
+                    <div [innerHTML]="notFound"></div>
+                  </ng-template>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div *ngIf="_flag" class="container ">
+  <ng-container *ngIf="arr.length; else empty">
+    <div class="mt-5">
+      <div class="invoice overflow-auto">
+        <div style="min-width: 600px">
+          <div class="row contacts">
+            <div class="col invoice-to">
+              <br /><br /><br />
+              <h2 class="text-gray-light">Presciption List</h2>
+            </div>
+          </div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Doctor</th>
+                <th scope="col">Doctor Id</th>
+                <th scope="col">Reports</th>
+                <th scope="col">Date</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of arr; index as i">
+                <th>Dr.{{ item.docName }}</th>
+                <td>{{ item.docId }}</td>
+                <td>{{ item.reportdNeeded.length }}</td>
+                <td>{{ item.Date | date: "longDate" }}</td>
+                <td>
+                  <button class="btn btn-info"
+                    type="button"
+                    (click)="getDetails(item.prescriptionId, item.reportIds)"
+                  >
+                    Get Details
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="showDetails" class="mt-5" >
+      <div class="row">
+        <h3 class="col-12 col-md-10">Presciption Details</h3>
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="showDetails = false"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <table class="table ">
+        <thead>
+          <tr>
+            <th scope="col">Hospital</th>
+            <th scope="col">Date</th>
+            <th scope="col">time</th>
+            <th scope="col">Medicines</th>
+            <th scope="col">Doses</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>{{ prescData.hospital }}</th>
+            <td>{{ prescData.date | date: "dd/M/yyyy" }}</td>
+            <td>{{ prescData.time }}</td>
+            <td>
+              <table class="table table-borderless">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Days</th>
+                    <th scope="col">description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of prescData.medicines">
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.days }}</td>
+                    <td>
+                      {{
+                        item.description ? item.description : "No description"
+                      }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+            <td>
+              <table class="table table-borderless">
+                <thead>
+                  <tr>
+                    <th scope="col">Morning</th>
+                    <th scope="col">Afternoon</th>
+                    <th scope="col">Night</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of prescData.medicines">
+                    <td>{{ item.doses.morning ? item.doses.morning : 0 }}</td>
+                    <td>
+                      {{ item.doses.afternoon ? item.doses.afternoon : 0 }}
+                    </td>
+                    <td>{{ item.doses.night ? item.doses.night : 0 }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br />
+      <h3>Reports:</h3> 
+     <span style="font-size: 18px;font-weight: 400;" class="mr-5"> {{ reports }}</span><button *ngIf="isReport" class="btn btn-primary" (click)="downloadReport()">Download</button>
+    </div>
+  </ng-container>
+  <ng-template #empty> <h3>No prescriptions to display...</h3></ng-template>
+</div>

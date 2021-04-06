@@ -1,0 +1,9 @@
+btn btn-link{
+    text-decoration: none;
+    color: #242429;
+    font-size: 14px;
+    padding: 38px 23px;
+    font-family: "Playfair Display", serif;
+    line-height: 13px;
+    text-transform: capitalize;
+}

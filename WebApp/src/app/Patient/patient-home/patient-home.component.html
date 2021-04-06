@@ -1,0 +1,54 @@
+<div style="margin-top: 8%;"></div>
+<link
+  href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+  rel="stylesheet"
+  id="bootstrap-css"
+/>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link
+  href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700"
+  rel="stylesheet"
+  type="text/css"
+/>
+
+<div class="container">
+  <div class="row justify-content-end mb-3">
+    <button type="button" class="btn btn-primary" (click)="toPdf()">
+      Download Card
+    </button>
+  </div>
+  <div id="healthcard">
+    <div
+      class="border border-secondary rounded p-2 ml-5"
+      style="height:10%; width:40%;"
+    >
+      <div class="tile mb-3">
+        <h4 align="center">Health Card</h4>
+        <hr />
+        <div class="row">
+          <div class="col-6 justify-content-center align-item-center">
+            <strong>Name:</strong> {{ userData.firstname }}
+            {{ userData.lastname }}<br />
+            <strong>Date of Birth:</strong> {{ userData.dob }}<br />
+            <strong>Address:</strong> {{ userData.address }}<br />
+            <strong>Contact no.:</strong> {{ userData.contact }}<br />
+            <strong>Blood Group:</strong> {{ userData.blood }}<br />
+            <strong>Email:</strong> {{ userData.email }}<br />
+          </div>
+          <div class="col-5">
+            <qrcode
+              [qrdata]="userData | json"
+              [width]="150"
+              [errorCorrectionLevel]="'M'"
+            ></qrcode>
+          </div>
+        </div>
+        <hr>
+        <div class="row justify-content-center"><h2>{{userId}}</h2></div> 
+      </div>
+    </div>
+  </div>
+</div>
