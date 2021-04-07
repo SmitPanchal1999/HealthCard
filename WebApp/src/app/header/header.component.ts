@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RegisterService } from '../register.service';
 
+import * as CryptoJs from "crypto-js";
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -8,12 +9,21 @@ import { RegisterService } from '../register.service';
 })
 export class HeaderComponent implements OnInit {
 
-  public isLogged
-  public userType
+  public isLogged;
+  public userType;
+
   constructor(private registerService:RegisterService) { 
-    this.registerService.isLoggedCast.subscribe(stat=> this.isLogged=stat)
-    this.registerService.userTypeCast.subscribe(info => this.userType=info)
-  }
+   this.isLogged= sessionStorage.getItem("isLogged");
+    
+    if (sessionStorage.getItem("type")!==null){
+      this.userType = CryptoJs.AES.decrypt(sessionStorage.getItem("type"),"Hello!").toString(CryptoJs.enc.Utf8);
+      this.userType.toLowerCase();
+   
+    }
+    else {
+      this.userType="heelllo";
+    }
+     }
   
   ngOnInit() {
   }

@@ -35,8 +35,15 @@ export class DiagnoseComponent implements OnInit {
     private router: Router,
     private _addPrescriptionService: AddPrescriptionService
   ) {
-    this.userId = sessionStorage.getItem("uid");
-    this.register.userData.asObservable().subscribe((d) => (this.userData = d));
+    this.userId = sessionStorage.getItem("uid");this.http
+    .get(
+      this.register.registerUrl +
+        "/commonUserData/" +
+        sessionStorage.getItem("uid")
+    )
+    .subscribe((res: any) => {
+      this.userData = res.userData;
+    });
   }
 
   ngOnInit() {

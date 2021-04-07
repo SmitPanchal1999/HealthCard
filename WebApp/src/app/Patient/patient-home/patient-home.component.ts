@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { RegisterService } from "src/app/register.service";
 import htmlToImage from "html-to-image";
 import * as jspdf from "jspdf";   
+import { HttpClient } from "@angular/common/http";
 
 @Component({
   selector: "app-patient-home",
@@ -11,11 +12,17 @@ import * as jspdf from "jspdf";
 export class PatientHomeComponent implements OnInit {
 public userData;
   public userId;
-  constructor(private registerService: RegisterService) {
-    this.registerService.userData
-      .asObservable()
-      .subscribe(data => (this.userData = data));
-    this.userId = sessionStorage.getItem("uid");
+  constructor(private registerService: RegisterService, private http: HttpClient) {
+    this.http
+      .get(
+        this.registerService.registerUrl +
+          "/commonUserData/" +
+          sessionStorage.getItem("uid")
+      )
+      .subscribe((res: any) => {
+        console.log("RESponse" + JSON.stringify(res));
+        this.userData = res.userData;
+      });
 
   }
 

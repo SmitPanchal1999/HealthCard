@@ -354,13 +354,26 @@ export class RegisterService {
           this.Toastr.success("Login Successful");
 
           if (response.userType.toLowerCase() == "patient")
-            this.router.navigate(["/Patient/Home"]);
-          else if (response.userType.toLowerCase() == "doctor")
-            this.router.navigate(["/Diagnose"]);
-          else if (response.userType.toLowerCase() == "lab")
-            this.router.navigate(["/lab/labhome"]);
-          else if (response.userType.toLowerCase() == "medical")
-            this.router.navigate(["/Patient/Home"]);
+          {
+            this.router.navigate(["/Patient/Home"]).then(() => {
+              window.location.reload();
+            });
+          }
+            else if (response.userType.toLowerCase() == "doctor"){
+            this.router.navigate(["/Diagnose"]).then(() => {
+              window.location.reload();
+            });
+          }
+          else if (response.userType.toLowerCase() == "lab"){
+            this.router.navigate(["/lab/labhome"]).then(() => {
+              window.location.reload();
+            });
+          }
+          else if (response.userType.toLowerCase() == "medical"){
+            this.router.navigate(["/Patient/Home"]).then(() => {
+              window.location.reload();
+            });
+          }
         } else {
           this.Toastr.error("Login Failed");
         }
@@ -374,7 +387,9 @@ export class RegisterService {
     sessionStorage.removeItem("uid");
     sessionStorage.removeItem("type");
     this.Toastr.success("Logged Out");
-    this.router.navigate(["/Login"]);
+    this.router.navigate(["/Login"]).then(() => {
+      window.location.reload();
+    });
   }
 
   // getOtpSub() {
