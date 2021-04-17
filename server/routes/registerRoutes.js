@@ -127,7 +127,9 @@ router.post("/registeruser", async (req, res) => {
           });
         })
         .catch((err) => {
-          console.log("user error", err);
+          res.status(200).json({
+            message:"exists"
+          })
         });
     })
     .catch((err) => {

@@ -47,11 +47,12 @@ export class SignupComponent implements OnInit {
       if (select == "1") {
         this.Toastr.warning("Select How Do You Want To Sign Up");
       } else if (password != cpassword) {
-        this.Toastr.error("Password and confirmm Password are not matched");
+        this.Toastr.error("Password and confirm Password does not match");
       } else if (select == "patient") {
         this.registerService
           .getUserId(fname, lname, dob, user)
           .subscribe((response) => {
+             console.log(response);
             this.id = response.userId;
             this.registerService
               .registerUser(
@@ -69,6 +70,7 @@ export class SignupComponent implements OnInit {
               .subscribe((res) => {
                 console.log("resg status:", res);
                 if (res.success) this.router.navigate(["/Login"]);
+                else if(res.message) this.Toastr.error("Email already exists");
                 else this.Toastr.error("Registration Failed");
               });
           });
@@ -88,7 +90,7 @@ export class SignupComponent implements OnInit {
         });
       }
     } else {
-      this.Toastr.error("All fields are mendetory!!");
+      this.Toastr.error("All fields are mandatory!!");
     }
   }
 }

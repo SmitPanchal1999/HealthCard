@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
       console.log(uname.value, password.value);
       this.registeService.login(uname.value, password.value);
     } else {
-      this.Toastr.error("All fields are mendetory!!");
+      this.Toastr.error("All fields are mandatory!!");
     }
   }
 }

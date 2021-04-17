@@ -375,7 +375,7 @@ export class RegisterService {
             });
           }
         } else {
-          this.Toastr.error("Login Failed");
+          this.Toastr.error("Invalid email and password");
         }
       });
   }

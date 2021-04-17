@@ -5,7 +5,7 @@ import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { AddPrescriptionComponent } from "../Prescription/add-prescription/add-prescription.component";
 import { AddPrescriptionService } from "../Prescription/add-prescription/add-prescription.service";
-
+import { ToastrService } from "ngx-toastr";
 @Component({
   selector: "app-diagnose",
   templateUrl: "./diagnose.component.html",
@@ -20,7 +20,7 @@ export class DiagnoseComponent implements OnInit {
   public today1: any;
   public temp = [];
   public user;
-  public selected;
+  public selected={};
   public users;
   public alluser;
   public obj;
@@ -33,7 +33,8 @@ export class DiagnoseComponent implements OnInit {
     private datePipe: DatePipe,
     private http: HttpClient,
     private router: Router,
-    private _addPrescriptionService: AddPrescriptionService
+    private _addPrescriptionService: AddPrescriptionService,
+    private Toastr: ToastrService
   ) {
     this.userId = sessionStorage.getItem("uid");this.http
     .get(
@@ -94,7 +95,15 @@ export class DiagnoseComponent implements OnInit {
 
   addDiagnosis(form) {
     // console.log(form)
-    var x = this.selected.name;
+   let symtoms= form.symptoms.value.replace(/\s+/g, ' ').trim();
+   let foundOrNot= document.getElementById("patientFound");
+   console.log(this.selected);
+    if (this.selected.hasOwnProperty("name") && symtoms!==""){
+
+    
+    var x = this.selected["name"];
+    
+    console.log("x is ",x);
     var y = x.split(" ");
     //console.log("ddeemmo"+y)
     var docId = this.userId;
@@ -122,5 +131,12 @@ export class DiagnoseComponent implements OnInit {
           this.router.navigate(["/Prescription/Add"]);
         }
       });
+    }
+    else if (!this.selected.hasOwnProperty("name") && symtoms!==""){
+      this.Toastr.error("Invalid Patient-id");
+    }
+    else{
+      this.Toastr.error("Patient-Id and Symptoms are mandatory!!");
+    }
   }
 }
