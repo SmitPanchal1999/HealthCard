@@ -14,13 +14,21 @@ export class DoctorGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
-      var type = CryptoJs.AES.decrypt(sessionStorage.getItem("type"),"Hello!").toString(CryptoJs.enc.Utf8)
-      console.log("type:",type)
+     
       
-      if(sessionStorage.getItem("isLogged") == 'true' && type.toLowerCase() == "doctor")
-        return true
+      if(sessionStorage.getItem("isLogged") == 'true')
+      {
+        var type = CryptoJs.AES.decrypt(sessionStorage.getItem("type"),"Hello!").toString(CryptoJs.enc.Utf8)
+        console.log("type:",type)
+        if(type.toLowerCase() == "doctor")
+          {
+            return true
+          }
+      }
+        
       
       else{
+      
         this.router.navigate(["/Login"])
         return false
       }

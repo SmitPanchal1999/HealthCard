@@ -16,7 +16,7 @@ import * as CryptoJs from "crypto-js";
   providedIn: "root"
 })
 export class PatientGuard implements CanActivate {
-  constructor(private router:Router) {}
+  constructor(private router: Router) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -26,16 +26,18 @@ export class PatientGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    var type = CryptoJs.AES.decrypt(
-      sessionStorage.getItem("type"),
-      "Hello!"
-    ).toString(CryptoJs.enc.Utf8);
-    console.log("type:", type);
-    if (
-      sessionStorage.getItem("isLogged") == "true" &&
-      type.toLowerCase() == "patient"
-    )
-      return true;
+    
+    if (sessionStorage.getItem("isLogged") == "true"){
+      var type = CryptoJs.AES.decrypt(
+        sessionStorage.getItem("type"),
+        "Hello!"
+      ).toString(CryptoJs.enc.Utf8);
+      console.log("type:", type);
+      if(type.toLowerCase() == "patient"){
+        return true;
+      }
+    }
+      
     else {
       this.router.navigate(["/Login"]);
     }
