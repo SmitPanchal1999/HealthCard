@@ -4,7 +4,7 @@
 #To install node.js
 
 
-A nice project with a nice description
+A nice project with nice description
 
 ---
 ## Requirements
