@@ -1,10 +1,7 @@
-#project is buid=ld on MEAN STACK
+#project is buit using MEAN STACK
 
 # Healthcard
 #To install node.js
-
-
-A nice project with nice description
 
 ---
 ## Requirements
@@ -39,4 +36,4 @@ If you need to update `npm`, you can make it using `npm`! Cool right? After runn
 
     $ npm install npm -g
     
- Project is based on problem defination provided for SSIP Gujarat Hackthon 2020
+
