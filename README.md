@@ -1,7 +1,5 @@
-#project is buit using MEAN STACK
-
 # Healthcard
-#To install node.js
+Developed the HealthCard platform using the MEAN stack, allowing users to securely store health records like prescriptions and lab reports. This enables healthcare providers to access comprehensive patient histories, improving treatment accuracy and care delivery. Check out the project report "HealthCard_Project_Report.pdf" for more details.
 
 ---
 ## Requirements
